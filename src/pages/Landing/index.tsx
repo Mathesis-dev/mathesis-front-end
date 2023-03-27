@@ -27,7 +27,7 @@ function Landing() {
         align={"center"}
         h={{ base: "80px", sm: "110px" }}
         position={"fixed"}
-        paddingX={{ base: "20%", md: "10%" }}
+        paddingX={{ base: "10%", md: "10%" }}
       >
         <Flex
           color={"white"}
