@@ -6,6 +6,7 @@ import { RouterProvider } from "react-router-dom";
 import styled from "@emotion/styled";
 import "@fontsource/fira-sans";
 import routes from "./routes/routes";
+import { theme } from "./theme";
 
 const AppContainer = styled.div`
   font-family: "Fira Sans";
@@ -13,7 +14,7 @@ const AppContainer = styled.div`
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <AppContainer>
         <RouterProvider router={routes} />
       </AppContainer>

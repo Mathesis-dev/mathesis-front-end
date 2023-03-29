@@ -29,7 +29,7 @@ function Landing() {
     <>
       <Flex
         w={"100%"}
-        bg={"#6E4AFF"}
+        bg={"primary.100"}
         justify={"space-between"}
         align={"center"}
         h={{ base: "5rem", sm: "6.875rem" }}
@@ -62,7 +62,7 @@ function Landing() {
 
       <Flex
         w={"100%"}
-        bg={"#6E4AFF"}
+        bg={"primary.100"}
         align={"center"}
         justify={"center"}
         h={{
@@ -177,14 +177,14 @@ function Landing() {
               plataforma e encontre os melhores profissionais.
             </Text>
             <Button
-              background={"#6E4AFF"}
+              background={"primary.100"}
               marginTop={{ base: "3.75rem", sm: "3.125rem" }}
               borderRadius={"20px"}
               paddingX={"3.75rem"}
               paddingY={"1.5625rem"}
               color={"white"}
               _hover={{
-                background: "#6E4AFF",
+                background: "primary.100",
               }}
             >
               Sobre nós
@@ -205,7 +205,7 @@ function Landing() {
         align={"center"}
         justify={"space-around"}
         h={{ base: "5rem", sm: "12.5rem" }}
-        bg={"#1F173F"}
+        bg={"primary.200"}
       >
         <Button
           borderRadius={"0px"}

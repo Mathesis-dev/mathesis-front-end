@@ -43,13 +43,13 @@ function Login() {
       className="page-container"
       direction={"column"}
       w={"100vw"}
-      bg={"#1F173F"}
+      bg={"primary.200"}
       h={"100vh"}
     >
       <Flex
         className="header"
         w={"100%"}
-        bg={"#1F173F"}
+        bg={"primary.200"}
         justify={"space-between"}
         align={"center"}
         h={{ base: "5rem", sm: "6.875rem" }}
@@ -119,14 +119,14 @@ function Login() {
                     onChange={(event) => setEmail(event.currentTarget.value)}
                     type={"email"}
                     borderRadius={{ base: "15px" }}
-                    borderColor={"rgba(235, 235, 245, 0.2)"}
+                    borderColor={"shadow.100"}
                     _hover={{
-                      borderColor: "#6E4AFF",
-                      boxShadow: "#6E4AFF",
+                      borderColor: "primary.100",
+                      boxShadow: "primary.100",
                     }}
                     _focusVisible={{
-                      borderColor: "#6E4AFF",
-                      boxShadow: "#6E4AFF",
+                      borderColor: "primary.100",
+                      boxShadow: "primary.100",
                     }}
                   />
                 </Flex>
@@ -139,14 +139,14 @@ function Login() {
                       }
                       type={showPassword ? "text" : "password"}
                       borderRadius={{ base: "15px" }}
-                      borderColor={"rgba(235, 235, 245, 0.2)"}
+                      borderColor={"shadow.100"}
                       _hover={{
-                        borderColor: "#6E4AFF",
-                        boxShadow: "#6E4AFF",
+                        borderColor: "primary.100",
+                        boxShadow: "primary.100",
                       }}
                       _focusVisible={{
-                        borderColor: "#6E4AFF",
-                        boxShadow: "#6E4AFF",
+                        borderColor: "primary.100",
+                        boxShadow: "primary.100",
                       }}
                     />
                     <InputRightElement width="4rem">
@@ -189,7 +189,7 @@ function Login() {
                     {isLoading ? (
                       <CircularProgress
                         isIndeterminate
-                        size="24px"
+                        size="1.5rem"
                         color="black"
                       />
                     ) : (
