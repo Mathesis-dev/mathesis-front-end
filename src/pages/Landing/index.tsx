@@ -32,7 +32,7 @@ function Landing() {
         bg={"#6E4AFF"}
         justify={"space-between"}
         align={"center"}
-        h={{ base: "80px", sm: "110px" }}
+        h={{ base: "5rem", sm: "6.875rem" }}
         position={"fixed"}
         paddingX={{ base: "10%", md: "10%" }}
         zIndex={"1"}
@@ -40,15 +40,15 @@ function Landing() {
         <Flex
           color={"white"}
           fontWeight={"bold"}
-          fontSize={{ base: "20px", sm: "23px", lg: "26px" }}
+          fontSize={{ base: "1.25rem", sm: "1.4375rem", lg: "1.625rem" }}
         >
           Mathesis
         </Flex>
         <Flex>
           <Button
             borderRadius={"20px"}
-            paddingX={{ base: "25px", sm: "30px" }}
-            paddingY={{ base: "20px", sm: "25px" }}
+            paddingX={{ base: "1.5625rem", sm: "1.875rem" }}
+            paddingY={{ base: "1.25rem", sm: "1.5625rem" }}
             _hover={{
               color: "white",
               bg: "black",
@@ -66,10 +66,9 @@ function Landing() {
         align={"center"}
         justify={"center"}
         h={{
-          base: "760px",
-          sm: "880px",
-          xl: "820px",
-          "2xl": "820px",
+          base: "47.5rem",
+          sm: "55rem",
+          xl: "51.25rem",
         }}
       >
         <Flex
@@ -87,11 +86,11 @@ function Landing() {
             }}
             w={{
               base: "0px",
-              md: "500px",
+              md: "31.25rem",
               xl: "80%",
               "2xl": "100%",
             }}
-            marginTop={"120px"}
+            marginTop={"7.5rem"}
             src={TeacherIcon}
             alt={"Professor com alunos"}
             display={{ base: "none", sm: "flex" }}
@@ -101,22 +100,22 @@ function Landing() {
               color={"white"}
               fontWeight={"bold"}
               fontSize={{
-                base: "40px",
-                "2xl": "48px",
+                base: "2.5rem",
+                "2xl": "3rem",
               }}
               textAlign={"center"}
-              paddingY={{ base: "40px", sm: "48px" }}
+              paddingY={{ base: "2.5rem", sm: "3rem" }}
             >
               Somos melhores juntos!
             </Text>
 
             <Text
               color={"white"}
-              width={{ base: "350px", sm: "100%", md: "560px" }}
+              width={{ base: "21.875rem", sm: "100%", md: "35rem" }}
               textAlign={"center"}
               fontSize={{
-                base: "20px",
-                "2xl": "22px",
+                base: "1.25rem",
+                "2xl": "1.375rem",
               }}
             >
               Mathesis te ajuda a encontrar professores para marcar aulas
@@ -125,11 +124,11 @@ function Landing() {
             </Text>
 
             <Button
-              width={"200px"}
-              marginTop={{ base: "50px", sm: "30px" }}
+              width={"12.5rem"}
+              marginTop={{ base: "3.125rem", sm: "1.875rem" }}
               borderRadius={"20px"}
-              paddingX={"30px"}
-              paddingY={"25px"}
+              paddingX={"1.875rem"}
+              paddingY={"1.5625rem"}
               _hover={{
                 color: "white",
                 bg: "black",
@@ -145,7 +144,7 @@ function Landing() {
         bg={"white"}
         align={"center"}
         justify={"center"}
-        h={{ base: "625px", sm: "800px", "2xl": "800px" }}
+        h={{ base: "39.0625rem", sm: "50rem" }}
       >
         <Flex
           w={"65%"}
@@ -157,21 +156,21 @@ function Landing() {
             <Text
               fontWeight={"bold"}
               fontSize={{
-                base: "40px",
-                "2xl": "48px",
+                base: "2.5rem",
+                "2xl": "3rem",
               }}
               textAlign={"center"}
-              paddingTop={{ base: "0px", sm: "80px" }}
-              paddingBottom={{ base: "45px", sm: "40px" }}
+              paddingTop={{ base: "0px", sm: "5rem" }}
+              paddingBottom={{ base: "2.8125rem", sm: "2.5rem" }}
             >
               Queremos te ajudar!
             </Text>
             <Text
-              width={{ base: "350px", sm: "100%", md: "560px" }}
+              width={{ base: "21.875rem", sm: "100%", md: "35rem" }}
               textAlign={"center"}
               fontSize={{
-                base: "20px",
-                "2xl": "22px",
+                base: "1.25rem",
+                "2xl": "1.375rem",
               }}
             >
               Nossa missão é te ajudar da melhor forma possível. Navegue pela
@@ -179,10 +178,10 @@ function Landing() {
             </Text>
             <Button
               background={"#6E4AFF"}
-              marginTop={{ base: "60px", sm: "50px" }}
+              marginTop={{ base: "3.75rem", sm: "3.125rem" }}
               borderRadius={"20px"}
-              paddingX={"60px"}
-              paddingY={"25px"}
+              paddingX={"3.75rem"}
+              paddingY={"1.5625rem"}
               color={"white"}
               _hover={{
                 background: "#6E4AFF",
@@ -195,9 +194,9 @@ function Landing() {
             src={TeamIcon}
             alt={"Equipe"}
             display={{ base: "none", sm: "flex" }}
-            marginTop={{ base: "0px", md: "0px", xl: "0px" }}
+            marginTop={"0px"}
             w={{ base: "0px", md: "60%", xl: "60%" }}
-            h={{ base: "0px", md: "500px", xl: "60%" }}
+            h={{ base: "0px", md: "31.25rem", xl: "60%" }}
           />
         </Flex>
       </Flex>
@@ -205,17 +204,17 @@ function Landing() {
         w={"100%"}
         align={"center"}
         justify={"space-around"}
-        h={{ base: "80px", sm: "200px" }}
+        h={{ base: "5rem", sm: "12.5rem" }}
         bg={"#1F173F"}
       >
         <Button
           borderRadius={"0px"}
-          width={{ base: "0px", md: "200px", lg: "300px" }}
-          height={{ base: "0px", md: "100px" }}
+          width={{ base: "0px", md: "12.5rem", lg: "18.75rem" }}
+          height={{ base: "0px", md: "6.25rem" }}
           display={{ base: "none", md: "flex" }}
           bg={selectedColor}
           color={"white"}
-          fontSize={{ base: "18px", lg: "26px" }}
+          fontSize={{ base: "1.125rem", lg: "1.625rem" }}
           fontWeight={"bold"}
           onMouseOver={() =>
             setSelectedColor(
@@ -228,25 +227,25 @@ function Landing() {
         >
           Mathesis
         </Button>
-        <Flex width={"350px"} justify={"space-around"}>
+        <Flex width={"21.875rem"} justify={"space-around"}>
           <Text
             cursor={"pointer"}
             color={"white"}
-            fontSize={{ base: "16px", sm: "18px" }}
+            fontSize={{ base: "1rem", sm: "1.125rem" }}
           >
             Criar conta
           </Text>
           <Text
             cursor={"pointer"}
             color={"white"}
-            fontSize={{ base: "16px", sm: "18px" }}
+            fontSize={{ base: "1rem", sm: "1.125rem" }}
           >
             Login
           </Text>
           <Text
             cursor={"pointer"}
             color={"white"}
-            fontSize={{ base: "16px", sm: "18px" }}
+            fontSize={{ base: "1rem", sm: "1.125rem" }}
           >
             Sobre nós
           </Text>
