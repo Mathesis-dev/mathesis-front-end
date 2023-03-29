@@ -1,5 +1,6 @@
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import TeacherIcon from "./../../assets/icons/teacher.svg";
 import TeamIcon from "./../../assets/icons/team.svg";
 
@@ -17,6 +18,12 @@ const bgColors = [
 
 function Landing() {
   const [selectedColor, setSelectedColor] = useState(bgColors[0]);
+
+  const navigate = useNavigate();
+
+  const navigateToLoginPage = () => {
+    navigate("/login");
+  };
 
   return (
     <>
@@ -46,6 +53,7 @@ function Landing() {
               color: "white",
               bg: "black",
             }}
+            onClick={navigateToLoginPage}
           >
             Login
           </Button>
