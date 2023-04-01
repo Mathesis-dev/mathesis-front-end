@@ -1,8 +1,8 @@
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import TeacherIcon from "./../../assets/icons/teacher.svg";
 import TeamIcon from "./../../assets/icons/team.svg";
+import Header from "./components/Header";
 
 const bgColors = [
   "#6E4AC2",
@@ -19,46 +19,9 @@ const bgColors = [
 function Landing() {
   const [selectedColor, setSelectedColor] = useState(bgColors[0]);
 
-  const navigate = useNavigate();
-
-  const navigateToLoginPage = () => {
-    navigate("/login");
-  };
-
   return (
     <>
-      <Flex
-        w={"100%"}
-        bg={"primary.100"}
-        justify={"space-between"}
-        align={"center"}
-        h={{ base: "5rem", sm: "6.875rem" }}
-        position={"fixed"}
-        paddingX={{ base: "10%", md: "10%" }}
-        zIndex={"1"}
-      >
-        <Flex
-          color={"white"}
-          fontWeight={"bold"}
-          fontSize={{ base: "1.25rem", sm: "1.4375rem", lg: "1.625rem" }}
-        >
-          Mathesis
-        </Flex>
-        <Flex>
-          <Button
-            borderRadius={"20px"}
-            paddingX={{ base: "1.5625rem", sm: "1.875rem" }}
-            paddingY={{ base: "1.25rem", sm: "1.5625rem" }}
-            _hover={{
-              color: "white",
-              bg: "black",
-            }}
-            onClick={navigateToLoginPage}
-          >
-            Login
-          </Button>
-        </Flex>
-      </Flex>
+      <Header />
 
       <Flex
         w={"100%"}
