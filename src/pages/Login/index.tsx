@@ -11,9 +11,9 @@ import {
   InputGroup,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import ErrorMessage from "../../components/ErrorMessage";
 import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
+import SignPagesHeader from "@/components/SignPagesHeader";
 
 function Login() {
   const [email, setEmail] = useState<string>("");
@@ -21,12 +21,6 @@ function Login() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-
-  const navigate = useNavigate();
-
-  const navigateToLandingPage = () => {
-    navigate("/");
-  };
 
   const handlePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -46,36 +40,7 @@ function Login() {
       bg={"primary.200"}
       h={"100vh"}
     >
-      <Flex
-        className="header"
-        w={"100%"}
-        bg={"primary.200"}
-        justify={"space-between"}
-        align={"center"}
-        h={{ base: "5rem", sm: "6.875rem" }}
-        position={"fixed"}
-        paddingX={{ base: "10%", md: "10%" }}
-      >
-        <Button
-          borderRadius={"20px"}
-          paddingX={{ base: "1.5625rem", sm: "1.875rem" }}
-          paddingY={{ base: "1.25rem", sm: "1.5625rem" }}
-          _hover={{
-            color: "white",
-            bg: "black",
-          }}
-          onClick={navigateToLandingPage}
-        >
-          Voltar
-        </Button>
-        <Flex
-          color={"white"}
-          fontWeight={"bold"}
-          fontSize={{ base: "1.25rem", sm: "1.4375rem", lg: "1.625rem" }}
-        >
-          Mathesis
-        </Flex>
-      </Flex>
+      <SignPagesHeader />
 
       <Flex
         className="login-form-container"
