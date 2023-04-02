@@ -21,13 +21,13 @@ export default function Footer() {
       w={"100%"}
       align={"center"}
       justify={"space-around"}
-      h={{ base: "5rem", sm: "12.5rem" }}
+      h={{ base: "5rem", sm: "8rem" }}
       bg={"primary.200"}
     >
       <Button
         borderRadius={"0px"}
-        width={{ base: "0px", md: "12.5rem", lg: "18.75rem" }}
-        height={{ base: "0px", md: "6.25rem" }}
+        width={{ base: "0px", md: "12.5rem", lg: "16.75rem" }}
+        height={{ base: "0px", md: "5.25rem" }}
         display={{ base: "none", md: "flex" }}
         bg={selectedColor}
         color={"white"}
