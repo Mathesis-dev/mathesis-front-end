@@ -14,6 +14,8 @@ import { useState } from "react";
 import ErrorMessage from "../../components/ErrorMessage";
 import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 import SignPagesHeader from "@/components/SignPagesHeader";
+import { useNavigate } from "react-router-dom";
+import CustomInput from "@/components/CustomInput";
 
 function Login() {
   const [email, setEmail] = useState<string>("");
@@ -21,6 +23,12 @@ function Login() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+
+  const navigate = useNavigate();
+
+  const navigateToRegisterPage = () => {
+    navigate("/register");
+  };
 
   const handlePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -79,40 +87,20 @@ function Login() {
                 <Flex direction={"column"}>
                   {error && <ErrorMessage message={error} />}
 
-                  <FormLabel>E-mail</FormLabel>
-                  <Input
+                  <CustomInput
+                    label={"E-mail"}
                     onChange={(event) => setEmail(event.currentTarget.value)}
                     type={"email"}
-                    borderRadius={{ base: "15px" }}
-                    borderColor={"shadow.100"}
-                    _hover={{
-                      borderColor: "primary.100",
-                      boxShadow: "primary.100",
-                    }}
-                    _focusVisible={{
-                      borderColor: "primary.100",
-                      boxShadow: "primary.100",
-                    }}
                   />
                 </Flex>
                 <Flex direction={"column"}>
                   <FormLabel>Senha</FormLabel>
                   <InputGroup>
-                    <Input
+                    <CustomInput
                       onChange={(event) =>
                         setPassword(event.currentTarget.value)
                       }
                       type={showPassword ? "text" : "password"}
-                      borderRadius={{ base: "15px" }}
-                      borderColor={"shadow.100"}
-                      _hover={{
-                        borderColor: "primary.100",
-                        boxShadow: "primary.100",
-                      }}
-                      _focusVisible={{
-                        borderColor: "primary.100",
-                        boxShadow: "primary.100",
-                      }}
                     />
                     <InputRightElement width="4rem">
                       <Button
@@ -170,7 +158,12 @@ function Login() {
         <Text color={"white"} cursor={"pointer"} mt={{ base: "1.625rem" }}>
           Esqueceu sua senha?
         </Text>
-        <Text color={"white"} cursor={"pointer"} mt={{ base: "0.625rem" }}>
+        <Text
+          onClick={navigateToRegisterPage}
+          color={"white"}
+          cursor={"pointer"}
+          mt={{ base: "0.625rem" }}
+        >
           Novo aqui? Crie sua conta!
         </Text>
       </Flex>
