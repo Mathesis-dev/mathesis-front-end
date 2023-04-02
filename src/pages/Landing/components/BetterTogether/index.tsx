@@ -11,7 +11,8 @@ export default function BetterTogether() {
       h={{
         base: "47.5rem",
         sm: "55rem",
-        xl: "50%",
+        xl: "42rem",
+        "2xl": "88vh",
       }}
     >
       <Flex

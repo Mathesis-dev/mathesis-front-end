@@ -8,7 +8,7 @@ export default function WannaHelp() {
       bg={"white"}
       align={"center"}
       justify={"center"}
-      h={{ base: "39.0625rem", sm: "38rem" }}
+      h={{ base: "39.0625rem", sm: "38rem", "2xl": "50rem" }}
     >
       <Flex
         w={"65%"}
