@@ -1,31 +1,32 @@
-import { FormLabel, Input } from "@chakra-ui/react";
+import { FormLabel, Select } from "@chakra-ui/react";
+
+interface Option {
+  value: string | number;
+  label: string;
+}
 
 interface Props {
   label?: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-  type: string;
-  pattern?: string;
+  onChange: React.ChangeEventHandler<HTMLSelectElement>;
+  options: Array<Option>;
   placeholder?: string;
   value: string;
 }
 
-export default function CustomInput({
+export default function CustomSelect({
   label,
   onChange,
-  type,
-  pattern,
+  options,
   placeholder,
   value,
 }: Props) {
   return (
     <>
       {label && <FormLabel>{label}</FormLabel>}
-      <Input
+      <Select
         value={value}
         placeholder={placeholder}
-        pattern={pattern}
         onChange={onChange}
-        type={type}
         borderRadius={{ base: "15px" }}
         borderColor={"shadow.100"}
         _hover={{
@@ -36,7 +37,19 @@ export default function CustomInput({
           borderColor: "primary.100",
           boxShadow: "primary.100",
         }}
-      />
+      >
+        {options.map((option: Option) => {
+          return (
+            <option
+              style={{ backgroundColor: "#1F173F" }}
+              key={option.value}
+              value={option.value}
+            >
+              {option.label}
+            </option>
+          );
+        })}
+      </Select>
     </>
   );
 }

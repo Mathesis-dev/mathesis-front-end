@@ -16,7 +16,6 @@ export default function SignPagesHeader() {
       justify={"space-between"}
       align={"center"}
       h={{ base: "5rem", sm: "6.875rem" }}
-      position={"fixed"}
       paddingX={{ base: "10%", md: "10%" }}
     >
       <Button
