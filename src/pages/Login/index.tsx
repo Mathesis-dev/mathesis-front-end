@@ -88,6 +88,7 @@ function Login() {
                   {error && <ErrorMessage message={error} />}
 
                   <CustomInput
+                    value={email}
                     label={"E-mail"}
                     onChange={(event) => setEmail(event.currentTarget.value)}
                     type={"email"}
@@ -97,6 +98,7 @@ function Login() {
                   <FormLabel>Senha</FormLabel>
                   <InputGroup>
                     <CustomInput
+                      value={password}
                       onChange={(event) =>
                         setPassword(event.currentTarget.value)
                       }
