@@ -1,7 +1,14 @@
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import TeacherIcon from "../../../../assets/icons/teacher.svg";
 
 export default function BetterTogether() {
+  const navigate = useNavigate();
+
+  const navigateToRegisterPage = () => {
+    navigate("/register");
+  };
+
   return (
     <Flex
       w={"100%"}
@@ -68,6 +75,7 @@ export default function BetterTogether() {
           </Text>
 
           <Button
+            onClick={navigateToRegisterPage}
             width={"12.5rem"}
             marginTop={{ base: "3.125rem", sm: "1.875rem" }}
             borderRadius={"20px"}
