@@ -1,0 +1,12 @@
+version: "3.2"
+services:
+  mathesis-front-end-node:
+    image: node:18.15.0
+    container_name: mathesis-front-end
+    user: "root"
+    restart: "no"
+    working_dir: /app
+    volumes:
+      - ./:/app
+    network_mode: "host"
+    command: bash -c "yarn; yarn dev --host"
