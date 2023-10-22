@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://mathesis.vercel.app/"><img src="./.github/assets/mathesis-logo.png" alt="Mathesis" width="200"></a>
+  <a href="https://mathesis.vercel.app/"><img src="./.github/assets/mathesis-logo.jpg" alt="Mathesis" width="200"></a>
   <br>
   Mathesis
   <br>
@@ -45,7 +45,7 @@ O projeto usa [yarn](https://yarnpkg.com/) para rodar e instalar dependências.
 
 ## Como usar
 
-Clone [o repositório](https://github.com/Mathesis-dev/mathesis-front-end) e instale todas as dependências, depois disso, você estará apto para rodar o projeto localmente.
+Clone [o repositório](https://github.com/Mathesis-dev/mathesis-front-end) e instale todas as dependências, depois disso, você estará apto para rodar o projeto localmente. Você também pode usar Docker para uma melhor experiência de desenvolvimento.
 
 ```bash
 # Clone esse repositório
@@ -60,4 +60,7 @@ $ yarn
 
 # Rodar a aplicação
 $ yarn dev
+
+# Rodar a aplicação (usando Docker)
+$ docker compose up
 ```

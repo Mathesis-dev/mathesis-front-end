@@ -14,13 +14,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"],
-      "@pages/*": ["./src/pages/*"],
-      "@components/*": ["./src/components/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@/*": ["./src/*"],
+      "@core/*": ["./src/core/*"],
+      "@modules/*": ["./src/modules/*"],
+      "@shared/*": ["./src/shared/*"]
     }
   },
   "include": ["src"],
