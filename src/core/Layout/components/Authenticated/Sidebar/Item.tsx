@@ -48,10 +48,9 @@ export default function AuthenticatedSidebarItem({
     ? toggleSubList
     : () => handleNavigate(item.path ?? '');
 
-  const selected =
-    item.children
-      ? pathname.includes(item.path ?? '')
-      : pathname === item.path;
+  const selected = item.children
+    ? pathname.includes(item.path ?? '')
+    : pathname === item.path;
 
   useEffect(() => {
     if (!openedSidebar) setOpen(false);
@@ -76,19 +75,19 @@ export default function AuthenticatedSidebarItem({
       {item.children && item.children.length > 0 && (
         <Collapse in={open} sx={{ padding: 0, margin: 0 }}>
           <List component="div" disablePadding>
-            {item.children.map(({ name, path, ability }, index) => {
-                return (
-                  <ListItemButton
-                    disableRipple
-                    disableGutters
-                    sx={SubSidebarButton}
-                    key={`${name}-${index}`}
-                    selected={path === pathname}
-                    onClick={() => handleNavigate(path ?? '')}
-                  >
-                    <ListItemText primary={name} />
-                  </ListItemButton>
-                );
+            {item.children.map(({ name, path }, index) => {
+              return (
+                <ListItemButton
+                  disableRipple
+                  disableGutters
+                  sx={SubSidebarButton}
+                  key={`${name}-${index}`}
+                  selected={path === pathname}
+                  onClick={() => handleNavigate(path ?? '')}
+                >
+                  <ListItemText primary={name} />
+                </ListItemButton>
+              );
             })}
           </List>
         </Collapse>

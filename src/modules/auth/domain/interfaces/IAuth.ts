@@ -1,4 +1,4 @@
-import User from '@/modules/user/domain/entities/User';
+import User from '@/shared/domain/entities/User';
 
 export default interface IAuth {
   authenticated: boolean;

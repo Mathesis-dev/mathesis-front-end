@@ -1,6 +1,6 @@
-import { Alert, AlertTitle } from "@mui/material";
+import { Alert, AlertTitle } from '@mui/material';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import Box from "@mui/material/Box";
+import { Box } from '@mui/material';
 
 interface Props {
   message: string;

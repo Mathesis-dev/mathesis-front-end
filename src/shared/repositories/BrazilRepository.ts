@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-import CEP from '../domain/entities/CEP';
 import UF from '../domain/entities/UF';
 
 import { isArray } from '../utils/Array';
@@ -11,16 +10,6 @@ export default class BrazilRepository {
 
   private isOK(status: number): boolean {
     return status >= 200 && status < 300;
-  }
-
-  public async address(value: string): Promise<CEP> {
-    const { status, data } = await axios.get<CEP>(
-      `${this.uri}/cep/v2/${value}`
-    );
-
-    if (this.isOK(status)) return CEP.make(data);
-
-    throw new Error('Ops... Algo inesperado aconteceu!');
   }
 
   public async states(): Promise<Array<UF>> {
