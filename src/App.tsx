@@ -1,5 +1,6 @@
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
-import { CssBaseline, ThemeProvider } from '@mui/material';
 import { SWRConfig, SWRConfiguration } from 'swr';
 import { toast } from 'react-toastify';
 
@@ -12,7 +13,7 @@ import { AuthProvider } from './modules/auth/contexts/authContext';
 import 'react-toastify/dist/ReactToastify.css';
 import '@core/Theme/global.css';
 
-import { register } from 'swiper/element/bundle'
+import { register } from 'swiper/element/bundle';
 
 register();
 import 'swiper/css';
@@ -42,9 +43,9 @@ export default function App() {
 
       <SWRConfig value={swrConfiguration}>
         <BrowserRouter>
-            <AuthProvider>
-              <Router />
-            </AuthProvider>
+          <AuthProvider>
+            <Router />
+          </AuthProvider>
         </BrowserRouter>
       </SWRConfig>
     </ThemeProvider>
