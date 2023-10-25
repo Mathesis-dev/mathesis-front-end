@@ -17,9 +17,11 @@ import SignPagesHeader from '../../components/SignPagesHeader';
 import { loginData, loginSchema } from '../../domain/schemas/login';
 import useAuth from '../../hooks/useAuth';
 import { decrypt, encrypt } from '@/shared/utils/Crypt';
+import { isMobile } from '@/shared/utils/Mobile';
 
 function Login() {
   const { login, loading } = useAuth();
+  const mobile = isMobile();
 
   const [alert, setAlert] = useState<IUnauthenticatedAlert>({
     message: '',
@@ -85,7 +87,7 @@ function Login() {
         alignItems="center"
         justifyContent="center"
       >
-        <Stack gap={2} width="25%">
+        <Stack gap={2} width={mobile ? '70%' : '25%'}>
           <UnauthenticatedAlert
             alert={alert}
             clear={() => setAlert({ message: '', type: 'error' })}
