@@ -1,96 +1,174 @@
-import React, { useState } from 'react';
-import {
-  Button,
-  CircularProgress,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
-  Typography,
-  IconButton,
-  Box,
-} from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import EUnauthenticatedPath from '@/core/Router/enums/EUnauthenticatedPath';
+import LoadingButton from '@/shared/components/Buttons/LoadingButton';
+import ControlledCheckbox from '@/shared/components/Fields/Controlled/Checkbox';
+import ControlledPassword from '@/shared/components/Fields/Controlled/Password';
+import ControlledText from '@/shared/components/Fields/Controlled/Text';
+import useLocalStorage from '@/shared/hooks/useLocalStorage';
+import { formatErrorForNotification } from '@/shared/utils/Error';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Box, Link, Stack, Typography } from '@mui/material';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link as LinkRouter } from 'react-router-dom';
+import UnauthenticatedAlert, {
+  IUnauthenticatedAlert,
+} from '../../components/Alert';
 import SignPagesHeader from '../../components/SignPagesHeader';
-import ErrorMessage from '../../components/ErrorMessage';
+import { loginData, loginSchema } from '../../domain/schemas/login';
+import useAuth from '../../hooks/useAuth';
+import { decrypt, encrypt } from '@/shared/utils/Crypt';
 
 function Login() {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
+  const { login, loading } = useAuth();
 
-  const handlePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const [alert, setAlert] = useState<IUnauthenticatedAlert>({
+    message: '',
+    type: 'error',
+  });
 
-  const login = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
+  const { storedValue, storeValue, clearStorage } = useLocalStorage<loginData>(
+    'login',
+    {
+      email: '',
+      password: '',
+      remember: false,
+    }
+  );
+
+  const { control, handleSubmit } = useForm<loginData>({
+    defaultValues: {
+      email: storedValue.email || undefined,
+      password: decrypt(storedValue.password) || undefined,
+      remember: storedValue.remember,
+    },
+    resolver: zodResolver(loginSchema),
+  });
+
+  async function submit(data: loginData) {
+    if (loading) return;
+
+    try {
+      const { email, password, remember } = data;
+
+      if (remember) {
+        storeValue({ email, password: encrypt(password), remember });
+      } else {
+        clearStorage();
+      }
+
+      await login(data);
+    } catch (error) {
+      setAlert({
+        message: formatErrorForNotification(error),
+        type: 'error',
+      });
+    }
+  }
 
   return (
-    <Box display="flex" flexDirection="column" width="100vw" height="100vh" bgcolor="primary.200">
+    <Box
+      display="flex"
+      flexDirection="column"
+      width="100vw"
+      height="100vh"
+      bgcolor="primary.dark"
+    >
       <SignPagesHeader />
 
-      <Box display="flex" justifyContent="center" alignItems="center" width="100%" height="100%" flexDirection="column">
-        <Box width={['80%', '70%', '50%', '40%', '25%']} display="flex" flexDirection="column" color="white" fontWeight="bold">
-          <form onSubmit={login}>
-            <FormControl fullWidth variant="outlined" required>
-              <Typography fontSize={{ xs: '1.25rem' }} marginBottom={{ xs: '1.25rem' }} textAlign="center">
-                Login
-              </Typography>
-              <Box display="flex" flexDirection="column" minHeight={error ? '20rem' : '15rem'} justifyContent="space-between">
-                <Box display="flex" flexDirection="column">
-                  {error && <ErrorMessage message={error} />}
-                  
-                  <InputLabel htmlFor="email-input">E-mail</InputLabel>
-                  <OutlinedInput
-                    id="email-input"
-                    type="email"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                  />
-                </Box>
+      <Stack
+        gap={2}
+        height="100%"
+        width="100%"
+        component="form"
+        onSubmit={handleSubmit(submit)}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Stack gap={2} width="25%">
+          <UnauthenticatedAlert
+            alert={alert}
+            clear={() => setAlert({ message: '', type: 'error' })}
+          />
 
-                <Box display="flex" flexDirection="column">
-                  <InputLabel htmlFor="password-input">Senha</InputLabel>
-                  <OutlinedInput
-                    id="password-input"
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton onClick={handlePasswordVisibility} edge="end">
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                  <Button
-                    disabled={isLoading}
-                    type="submit"
-                    color="primary"
-                    variant="contained"
-                    sx={{ mt: '1.5625rem', py: '1.25rem', borderRadius: '15px' }}
-                  >
-                    {isLoading ? <CircularProgress size="1.5rem" /> : 'Login'}
-                  </Button>
-                </Box>
-              </Box>
-            </FormControl>
-          </form>
-        </Box>
+          <Typography
+            display="flex"
+            justifyContent="center"
+            fontWeight="bold"
+            color="white.main"
+            fontSize={22}
+          >
+            Login
+          </Typography>
 
-        <Typography color="white" sx={{ mt: '1.625rem', cursor: 'pointer' }}>
-          Esqueceu sua senha?
-        </Typography>
-        <Typography color="white" sx={{ mt: '0.625rem', cursor: 'pointer' }}>
-          Novo aqui? Crie sua conta!
-        </Typography>
-      </Box>
+          <ControlledText
+            label="E-mail"
+            name="email"
+            size="small"
+            control={control}
+            placeholder="usuario@email.com"
+            color="white.main"
+            borderColor="secondary.light"
+            hoverColor="primary.main"
+          />
+
+          <ControlledPassword
+            label="Senha"
+            size="small"
+            name="password"
+            helper={false}
+            control={control}
+            color="white.main"
+            borderColor="secondary.light"
+            hoverColor="primary.main"
+          />
+
+          <ControlledCheckbox
+            label="Lembrar-me"
+            name="remember"
+            control={control}
+            color="white.main"
+          />
+
+          <LoadingButton
+            loading={loading}
+            loadingText="Acessando..."
+            variant="contained"
+            type="submit"
+            size="large"
+            sx={{
+              color: 'black',
+              bgcolor: 'white.main',
+              '&:hover': {
+                bgcolor: 'black',
+                color: 'white.main',
+              },
+            }}
+          >
+            Acessar
+          </LoadingButton>
+
+          <Stack alignItems={'center'} gap={2}>
+            <Link
+              sx={{ textDecorationColor: 'transparent' }}
+              color="white.main"
+              component={LinkRouter}
+              to={`/${EUnauthenticatedPath.RECOVER}`}
+            >
+              Esqueceu sua senha?
+            </Link>
+
+            <Link
+              sx={{ textDecorationColor: 'transparent' }}
+              color="white.main"
+              component={LinkRouter}
+              to={`/${EUnauthenticatedPath.REGISTER}`}
+            >
+              Novo aqui? Crie sua conta!
+            </Link>
+          </Stack>
+        </Stack>
+      </Stack>
     </Box>
   );
 }

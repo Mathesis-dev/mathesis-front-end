@@ -15,6 +15,7 @@ export const loginSchema = z.object({
     .min(8, 'Senha de no mínimo 8 caracteres.')
     .trim()
     .refine(validatePassword, 'Senha inválida!'),
+  remember: z.boolean(),
 });
 
 export type loginData = z.infer<typeof loginSchema>;

@@ -5,18 +5,21 @@ interface Props extends UseControllerProps<any> {
   label: string;
   disabled?: boolean;
   readOnly?: boolean;
+  color?: string;
 }
 
 export default function ControlledCheckbox({
   label,
   disabled,
   readOnly,
+  color,
   ...props
 }: Props) {
   const { field } = useController(props);
 
   return (
     <FormControlLabel
+      sx={{ color: color }}
       label={label}
       disabled={disabled}
       control={

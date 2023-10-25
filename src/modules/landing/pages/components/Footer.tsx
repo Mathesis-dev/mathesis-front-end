@@ -1,20 +1,37 @@
-import { Button, Box, Typography } from "@mui/material";
-import { useState } from "react";
+import EUnauthenticatedPath from '@/core/Router/enums/EUnauthenticatedPath';
+import { Button, Box, Typography } from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const bgColors = [
-  "#6E4AC2",
-  "#00A6CE",
-  "#ff3333",
-  "#fdf498",
-  "#fe8a71",
-  "#7bc043",
-  "#4b3832",
-  "#3c2f2f",
-  "#8b9dc3",
+  '#6E4AC2',
+  '#00A6CE',
+  '#ff3333',
+  '#fdf498',
+  '#fe8a71',
+  '#7bc043',
+  '#4b3832',
+  '#3c2f2f',
+  '#8b9dc3',
 ];
 
 export default function Footer() {
   const [selectedColor, setSelectedColor] = useState(bgColors[0]);
+  const navigate = useNavigate();
+
+  function handleNavigate(text: string) {
+    switch (text) {
+      case 'Login':
+        navigate(EUnauthenticatedPath.LOGIN);
+        break;
+      case 'Criar conta':
+        navigate(EUnauthenticatedPath.REGISTER);
+        break;
+      case 'Sobre nós':
+        navigate(EUnauthenticatedPath.LOGIN);
+        break;
+    }
+  }
 
   return (
     <Box
@@ -23,37 +40,37 @@ export default function Footer() {
       alignItems="center"
       justifyContent="space-around"
       height={{
-        xs: "5rem",
-        sm: "8rem"
+        xs: '5rem',
+        sm: '8rem',
       }}
-      bgcolor="primary.200"
+      bgcolor="primary.dark"
     >
       <Button
         sx={{
-          borderRadius: "0px",
+          borderRadius: '0px',
           width: {
-            xs: "0px",
-            md: "12.5rem",
-            lg: "16.75rem"
+            xs: '0px',
+            md: '12.5rem',
+            lg: '16.75rem',
           },
           height: {
-            xs: "0px",
-            md: "5.25rem"
+            xs: '0px',
+            md: '5.25rem',
           },
           display: {
-            xs: "none",
-            md: "flex"
+            xs: 'none',
+            md: 'flex',
           },
           bgcolor: selectedColor,
-          color: "white",
+          color: 'white.main',
           fontSize: {
-            xs: "1.125rem",
-            lg: "1.625rem"
+            xs: '1.125rem',
+            lg: '1.625rem',
           },
-          fontWeight: "bold",
+          fontWeight: 'bold',
           '&:hover': {
             backgroundColor: selectedColor,
-          }
+          },
         }}
         onMouseOver={() =>
           setSelectedColor(
@@ -63,21 +80,18 @@ export default function Footer() {
       >
         Mathesis
       </Button>
-      <Box
-        width="21.875rem"
-        display="flex"
-        justifyContent="space-around"
-      >
-        {["Criar conta", "Login", "Sobre nós"].map((text) => (
+      <Box width="21.875rem" display="flex" justifyContent="space-around">
+        {['Criar conta', 'Login', 'Sobre nós'].map((text) => (
           <Typography
+            onClick={() => handleNavigate(text)}
             key={text}
             sx={{
-              cursor: "pointer",
-              color: "white",
+              cursor: 'pointer',
+              color: 'white.main',
               fontSize: {
-                xs: "1rem",
-                sm: "1.125rem"
-              }
+                xs: '1rem',
+                sm: '1.125rem',
+              },
             }}
           >
             {text}

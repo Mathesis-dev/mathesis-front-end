@@ -14,6 +14,9 @@ interface Props extends UseControllerProps<any> {
   size?: 'medium' | 'small';
   label?: string;
   helper?: boolean;
+  color?: string;
+  borderColor?: string;
+  hoverColor?: string;
 }
 
 export default function ControlledPassword({
@@ -23,6 +26,9 @@ export default function ControlledPassword({
   helper = true,
   readOnly,
   disabled,
+  color,
+  borderColor,
+  hoverColor,
   ...props
 }: Props) {
   const {
@@ -52,6 +58,18 @@ export default function ControlledPassword({
         placeholder="********"
         helperText={error?.message}
         type={show ? 'text' : 'password'}
+        sx={{
+          '&:hover': {
+            '& .MuiOutlinedInput-root': {
+              '& > fieldset': { borderColor: hoverColor },
+            },
+          },
+          input: { color: color },
+          '& .MuiInputLabel-root': { color: color },
+          '& .MuiOutlinedInput-root': {
+            '& > fieldset': { borderColor: borderColor },
+          },
+        }}
         InputProps={{
           readOnly: readOnly,
           endAdornment: (
@@ -66,9 +84,11 @@ export default function ControlledPassword({
                 onMouseDown={handleMouseDownPassword}
               >
                 {show ? (
-                  <LockOpenOutlined sx={{ color: 'text.primary' }} />
+                  <LockOpenOutlined
+                    sx={{ color: `${color || 'text.primary'}` }}
+                  />
                 ) : (
-                  <LockOutlined sx={{ color: 'text.primary' }} />
+                  <LockOutlined sx={{ color: `${color || 'text.primary'}` }} />
                 )}
               </IconButton>
             </Tooltip>

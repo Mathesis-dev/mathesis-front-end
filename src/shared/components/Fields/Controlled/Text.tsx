@@ -16,6 +16,9 @@ interface Props extends UseControllerProps<any> {
   maxRows?: number;
   label: string;
   maxLength?: number;
+  color?: string;
+  borderColor?: string;
+  hoverColor?: string;
 }
 
 const TextMask = forwardRef<HTMLElement, any>(function TextMask(props, ref) {
@@ -36,6 +39,9 @@ export default function ControlledText({
   minRows,
   maxRows,
   maxLength,
+  color,
+  borderColor,
+  hoverColor,
   ...props
 }: Props) {
   const {
@@ -56,6 +62,18 @@ export default function ControlledText({
       multiline={multiline}
       placeholder={placeholder}
       helperText={error?.message}
+      sx={{
+        '&:hover': {
+          '& .MuiOutlinedInput-root': {
+            '& > fieldset': { borderColor: hoverColor },
+          },
+        },
+        input: { color: color },
+        '& .MuiInputLabel-root': { color: color },
+        '& .MuiOutlinedInput-root': {
+          '& > fieldset': { borderColor: borderColor },
+        },
+      }}
       InputProps={{
         readOnly: readOnly,
         endAdornment: icon,
