@@ -1,7 +1,7 @@
-import EUserCategory from "../enums/EUserCategory";
-import EUserGender from "../enums/EUserGender";
-import Student from "./Student";
-import Teacher from "./Teacher";
+import EUserCategory from '../enums/EUserCategory';
+import EUserGender from '../enums/EUserGender';
+import Student from './Student';
+import Teacher from './Teacher';
 
 export default class User {
   constructor(
@@ -11,16 +11,17 @@ export default class User {
     public category: EUserCategory,
     public gender: EUserGender,
 
-    public entity: Teacher | Student,
-   
+    public teacher: Teacher,
+    public student: Student,
+
     public createdAt: string,
     public updatedAt: string,
-    public deletedAt?: string,
-
+    public deletedAt?: string
   ) {}
 
   static make(data: any): User {
-    const entity = data.student ? Student.make(data.student) : Teacher.make(data.teacher);
+    const student = Student.make(data.student ?? {});
+    const teacher = Teacher.make(data.teacher ?? {});
 
     return new User(
       data.id ?? 0,
@@ -29,11 +30,12 @@ export default class User {
       data.category,
       data.gender,
 
-      entity,
+      teacher,
+      student,
 
       data.createdAt ?? '',
       data.updatedAt ?? '',
-      data.deletedAt,
+      data.deletedAt
     );
   }
 }
