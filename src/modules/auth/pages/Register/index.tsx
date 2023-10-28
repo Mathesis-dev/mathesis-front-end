@@ -335,7 +335,7 @@ function Register() {
           </LoadingButton>
         </Grid>
 
-        <Stack alignItems={'center'}>
+        <Stack alignItems={'center'} marginBottom={3}>
           <Link
             sx={{ textDecorationColor: 'transparent' }}
             color="white.main"
