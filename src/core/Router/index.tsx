@@ -11,7 +11,7 @@ import Authenticated from '../Layout/pages/Authenticated';
 
 import Login from '@/modules/auth/pages/Login';
 import Landing from '@/modules/landing/pages';
-// import Register from '@/modules/auth/pages/Register'; // TODO - Implementar rota de register
+import Register from '@/modules/auth/pages/Register';
 
 export default function Router() {
   return useRoutes([
@@ -28,7 +28,7 @@ export default function Router() {
         },
         {
           path: EUnauthenticatedPath.REGISTER,
-          element: <Login />, // TODO - Implementar rota de register
+          element: <Register />,
         },
       ],
     },

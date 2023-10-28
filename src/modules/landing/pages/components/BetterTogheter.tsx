@@ -1,7 +1,11 @@
 import { Box, Button, Typography } from '@mui/material';
 import TeacherIcon from '../../../../shared/assets/icons/teacher.svg';
+import EUnauthenticatedPath from '@/core/Router/enums/EUnauthenticatedPath';
+import { useNavigate } from 'react-router-dom';
 
 export default function BetterTogether() {
+  const navigate = useNavigate();
+
   return (
     <Box
       display="flex"
@@ -88,6 +92,7 @@ export default function BetterTogether() {
                 backgroundColor: 'black',
               },
             }}
+            onClick={() => navigate(EUnauthenticatedPath.REGISTER)}
           >
             Criar conta
           </Button>
