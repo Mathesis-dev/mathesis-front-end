@@ -33,7 +33,7 @@ Esse é o projeto front-end do sistema Mathesis que foi desenvolvido para a mat�
 
 - Vite;
 - React Hook Form;
-- ChakraUI;
+- MUI;
 
 O projeto usa [yarn](https://yarnpkg.com/) para rodar e instalar dependências.
 
