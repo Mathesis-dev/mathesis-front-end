@@ -7,7 +7,6 @@ interface TabPanelProps extends PropsWithChildren {
   sx?: SxProps<Theme>;
 }
 
-// TODO - Validar
 export default function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...otherProps } = props;
 
