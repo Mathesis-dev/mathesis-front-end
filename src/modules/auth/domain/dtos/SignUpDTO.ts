@@ -8,15 +8,15 @@ export default interface SignUpDTO {
   category: EUserCategory;
   gender: EUserGender;
   teacher?: {
-    biography: string;
-    phone: string;
-    state: string;
-    city: string;
-    schedules: {
-      subject: string;
-      cost: number;
-      onlineClass: boolean;
-      inPersonClass: boolean;
-    };
+    biography?: string;
+    phone?: string;
+    state?: string;
+    city?: string;
+    schedules?: Array<{
+      subject?: string;
+      cost?: number;
+      onlineClass?: boolean;
+      inPersonClass?: boolean;
+    }>;
   };
 }
