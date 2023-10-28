@@ -12,6 +12,9 @@ interface Props extends UseControllerProps<any> {
   size?: 'medium' | 'small';
   label: string;
   currencySymbol?: string | ReactNode;
+  color?: string;
+  borderColor?: string;
+  hoverColor?: string;
 }
 
 const NumberMask = forwardRef<HTMLElement, any>(function NumberMask(
@@ -31,6 +34,9 @@ export default function ControlledMonetary({
   disabled,
   label,
   currencySymbol = 'R$',
+  color,
+  borderColor,
+  hoverColor,
   ...props
 }: Props) {
   const {
@@ -56,10 +62,22 @@ export default function ControlledMonetary({
       onClick={handleSelect}
       placeholder={placeholder}
       helperText={error?.message}
+      sx={{
+        '&:hover': {
+          '& .MuiOutlinedInput-root': {
+            '& > fieldset': { borderColor: hoverColor },
+          },
+        },
+        input: { color: color },
+        '& .MuiInputLabel-root': { color: color },
+        '& .MuiOutlinedInput-root': {
+          '& > fieldset': { borderColor: borderColor },
+        },
+      }}
       InputProps={{
         startAdornment:
           typeof currencySymbol === `string` ? (
-            <Typography>{currencySymbol}</Typography>
+            <Typography sx={{ color: color }}>{currencySymbol}</Typography>
           ) : (
             currencySymbol
           ),
