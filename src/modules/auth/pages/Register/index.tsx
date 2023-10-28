@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Grid, Link, Stack, Typography } from '@mui/material';
 import { Fragment, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Link as LinkRouter } from 'react-router-dom';
+import { Link as LinkRouter, useNavigate } from 'react-router-dom';
 
 import Page from '@/core/Layout/components/Page';
 import ControlledCheckbox from '@/shared/components/Fields/Controlled/Checkbox';
@@ -39,6 +39,7 @@ import useAuth from '../../hooks/useAuth';
 function Register() {
   const { signUp, loading } = useAuth();
 
+  const navigate = useNavigate();
   const mobile = isMobile();
 
   const [alert, setAlert] = useState<IUnauthenticatedAlert>({
@@ -53,7 +54,18 @@ function Register() {
       name: '',
       category: undefined,
       gender: undefined,
-      teacher: undefined,
+      teacher: {
+        biography: undefined,
+        state: undefined,
+        city: undefined,
+        phone: undefined,
+        schedules: {
+          cost: undefined,
+          inPersonClass: false,
+          onlineClass: false,
+          subject: undefined,
+        },
+      },
     },
     resolver: zodResolver(signUpSchema),
   });
@@ -64,7 +76,6 @@ function Register() {
   const state: string | undefined = watch('teacher.state');
 
   async function submit(data: signUpData) {
-    console.log('data ->', data);
     if (loading) return;
 
     try {
@@ -78,10 +89,12 @@ function Register() {
           data.category === EUserCategory.TEACHER && data.teacher
             ? {
                 ...data.teacher,
-                schedules: {
-                  ...data.teacher.schedules,
-                  cost: +data.teacher.schedules.cost,
-                },
+                schedules: [
+                  {
+                    ...data.teacher.schedules,
+                    cost: Number(data?.teacher?.schedules?.cost),
+                  },
+                ],
               }
             : undefined,
       };
@@ -92,6 +105,8 @@ function Register() {
         type: 'success',
         message,
       });
+
+      navigate(`/${EUnauthenticatedPath.LOGIN}`);
     } catch (error) {
       setAlert({
         type: 'error',
@@ -104,15 +119,11 @@ function Register() {
     <Page>
       <SignPagesHeader />
 
-      <UnauthenticatedAlert
-        alert={alert}
-        clear={() => setAlert({ message: '', type: 'error' })}
-      />
-
       <Stack
         component="form"
         onSubmit={handleSubmit(submit, (error) => console.log(error))}
         sx={{
+          justifyContent: 'center',
           alignItems: 'center',
           width: '100%',
           height: '100%',
@@ -121,6 +132,11 @@ function Register() {
           bgcolor: 'primary.dark',
         }}
       >
+        <UnauthenticatedAlert
+          alert={alert}
+          clear={() => setAlert({ message: '', type: 'error' })}
+        />
+
         <Grid container spacing={2} width={mobile ? '70%' : '25%'}>
           <Grid item xs={12}>
             <Typography
