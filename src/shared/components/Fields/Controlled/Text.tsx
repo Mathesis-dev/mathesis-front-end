@@ -63,10 +63,11 @@ export default function ControlledText({
       placeholder={placeholder}
       helperText={error?.message}
       sx={{
-        '&:hover': {
-          '& .MuiOutlinedInput-root': {
-            '& > fieldset': { borderColor: hoverColor },
-          },
+        '& .MuiInputBase-root.MuiOutlinedInput-root': {
+          color: color,
+        },
+        '& .MuiInputBase-root.MuiOutlinedInput-root ::placeholder': {
+          color: color,
         },
         input: { color: color },
         '& .MuiInputLabel-root': { color: color },

@@ -11,6 +11,9 @@ interface Props extends UseControllerProps<any> {
   disabled?: boolean;
   label?: string;
   size?: 'medium' | 'small';
+  color?: string;
+  borderColor?: string;
+  hoverColor?: string;
 }
 
 const TextMask = forwardRef<HTMLElement, any>(function TextMask(props, ref) {
@@ -25,6 +28,9 @@ export default function ControlledPhone({
   size = 'small',
   readOnly,
   disabled,
+  color,
+  borderColor,
+  hoverColor,
   ...props
 }: Props) {
   const {
@@ -54,11 +60,23 @@ export default function ControlledPhone({
       helperText={error?.message}
       InputProps={{
         readOnly: readOnly,
-        endAdornment: <Phone />,
+        endAdornment: <Phone sx={{ color: color }} />,
         inputComponent: TextMask,
         inputProps: {
           mask: [{ mask: '(00) 0000-0000' }, { mask: '(00) 00000-0000' }],
           dispatch: handleDispatch,
+        },
+      }}
+      sx={{
+        '&:hover': {
+          '& .MuiOutlinedInput-root': {
+            '& > fieldset': { borderColor: hoverColor },
+          },
+        },
+        input: { color: color },
+        '& .MuiInputLabel-root': { color: color },
+        '& .MuiOutlinedInput-root': {
+          '& > fieldset': { borderColor: borderColor },
         },
       }}
     />

@@ -1,10 +1,11 @@
+import { Autocomplete, Box, LinearProgress, TextField } from '@mui/material';
 import { Fragment, useEffect, useState } from 'react';
 import { UseControllerProps, useController } from 'react-hook-form';
-import { Autocomplete, Box, LinearProgress, TextField } from '@mui/material';
 import useSWR from 'swr';
 
-import BrazilRepository from '@/shared/repositories/BrazilRepository';
 import UF from '@/shared/domain/entities/UF';
+import BrazilRepository from '@/shared/repositories/BrazilRepository';
+import { ArrowDropDown, CloseOutlined } from '@mui/icons-material';
 
 interface Props extends UseControllerProps<any> {
   placeholder?: string;
@@ -14,6 +15,9 @@ interface Props extends UseControllerProps<any> {
   size?: 'medium' | 'small';
   multiple?: boolean;
   label?: string;
+  color?: string;
+  borderColor?: string;
+  hoverColor?: string;
 }
 
 export default function ControlledUF({
@@ -24,6 +28,9 @@ export default function ControlledUF({
   disabled,
   multiple,
   label,
+  color,
+  borderColor,
+  hoverColor,
   ...props
 }: Props) {
   const {
@@ -90,6 +97,8 @@ export default function ControlledUF({
   return (
     <Autocomplete
       {...field}
+      clearIcon={<CloseOutlined sx={{ color: color }} />}
+      popupIcon={<ArrowDropDown sx={{ color: color }} />}
       size={size}
       multiple={multiple}
       value={multiple ? selectees : selected}
@@ -103,6 +112,18 @@ export default function ControlledUF({
         option.acronym == selected.acronym
       }
       options={options}
+      sx={{
+        '&:hover': {
+          '& .MuiOutlinedInput-root': {
+            '& > fieldset': { borderColor: hoverColor },
+          },
+        },
+        input: { color: color },
+        '& .MuiInputLabel-root': { color: color },
+        '& .MuiOutlinedInput-root': {
+          '& > fieldset': { borderColor: borderColor },
+        },
+      }}
       renderInput={(params) => (
         <Fragment>
           <TextField

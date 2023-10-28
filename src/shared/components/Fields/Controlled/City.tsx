@@ -10,6 +10,7 @@ import useSWR from 'swr';
 import { normalizeString } from '@/shared/utils/String';
 import BrazilRepository from '@/shared/repositories/BrazilRepository';
 import City from '@/shared/domain/entities/City';
+import { ArrowDropDown, CloseOutlined } from '@mui/icons-material';
 
 interface Props extends UseControllerProps<any> {
   placeholder?: string;
@@ -19,6 +20,9 @@ interface Props extends UseControllerProps<any> {
   size?: 'medium' | 'small';
   uf?: string;
   label: string;
+  color?: string;
+  borderColor?: string;
+  hoverColor?: string;
 }
 
 export default function ControlledCity({
@@ -29,6 +33,9 @@ export default function ControlledCity({
   disabled,
   label,
   uf,
+  color,
+  borderColor,
+  hoverColor,
   ...props
 }: Props) {
   const {
@@ -103,6 +110,8 @@ export default function ControlledCity({
   return (
     <Autocomplete
       {...field}
+      clearIcon={<CloseOutlined sx={{ color: color }} />}
+      popupIcon={<ArrowDropDown sx={{ color: color }} />}
       size={size}
       value={selected}
       options={options}
@@ -117,6 +126,18 @@ export default function ControlledCity({
         onChange(data?.name ?? '');
         setValue(`${props.name}IbgeCode`, data?.ibgeCode ?? undefined);
         setSelected(data);
+      }}
+      sx={{
+        '&:hover': {
+          '& .MuiOutlinedInput-root': {
+            '& > fieldset': { borderColor: hoverColor },
+          },
+        },
+        input: { color: color },
+        '& .MuiInputLabel-root': { color: color },
+        '& .MuiOutlinedInput-root': {
+          '& > fieldset': { borderColor: borderColor },
+        },
       }}
       renderInput={(params) => (
         <Fragment>
