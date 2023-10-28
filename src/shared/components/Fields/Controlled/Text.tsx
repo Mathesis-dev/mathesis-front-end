@@ -68,6 +68,12 @@ export default function ControlledText({
             '& > fieldset': { borderColor: hoverColor },
           },
         },
+        '& .MuiInputBase-root.MuiOutlinedInput-root': {
+          color: color,
+        },
+        '& .MuiInputBase-root.MuiOutlinedInput-root ::placeholder': {
+          color: color,
+        },
         input: { color: color },
         '& .MuiInputLabel-root': { color: color },
         '& .MuiOutlinedInput-root': {

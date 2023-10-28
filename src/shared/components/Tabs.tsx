@@ -7,7 +7,6 @@ interface Props {
   rootPath?: string;
 }
 
-// TODO - Validar
 export default function CustomTabs({ tabs, rootPath }: Props) {
   const isMobile: boolean = useMediaQuery((theme: any) =>
     theme.breakpoints.down('sm')

@@ -15,7 +15,6 @@ export default function SignPagesHeader() {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        position: 'fixed',
         bgcolor: 'primary.dark',
         width: '100%',
         height: { xs: '5rem', sm: '6.875rem' },

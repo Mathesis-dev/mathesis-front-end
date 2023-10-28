@@ -1,12 +1,11 @@
 export enum EUserGender {
-    MALE = 'Male',
-    FEMALE = 'Female',
-  }
-  
-  export enum EUserGenderTranslate {
-    MALE = 'Masculino',
-    FEMALE = 'Feminino',
-  }
-  
-  export default EUserGender;
-  
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
+}
+
+export enum EUserGenderTranslate {
+  MALE = 'Masculino',
+  FEMALE = 'Feminino',
+}
+
+export default EUserGender;

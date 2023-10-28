@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { Autocomplete, Box, TextField, Tooltip } from '@mui/material';
 import { UseControllerProps, useController } from 'react-hook-form';
 import IOption from '@/shared/domain/interfaces/IOption';
-import { HelpOutline } from '@mui/icons-material';
+import { HelpOutline, ArrowDropDown, CloseOutlined } from '@mui/icons-material';
 
 interface Props extends UseControllerProps<any> {
   disableClearable?: boolean;
@@ -16,6 +16,9 @@ interface Props extends UseControllerProps<any> {
   helper?: string | ReactNode;
   size?: 'medium' | 'small';
   label: string;
+  color?: string;
+  borderColor?: string;
+  hoverColor?: string;
 }
 
 export default function ControlledEnum({
@@ -30,6 +33,9 @@ export default function ControlledEnum({
   options,
   helper,
   label,
+  color,
+  borderColor,
+  hoverColor,
   ...props
 }: Props) {
   const {
@@ -112,6 +118,8 @@ export default function ControlledEnum({
   return (
     <Autocomplete
       {...field}
+      clearIcon={<CloseOutlined sx={{ color: color }} />}
+      popupIcon={<ArrowDropDown sx={{ color: color }} />}
       size={size}
       disableClearable={disableClearable}
       multiple={multiple}
@@ -120,12 +128,25 @@ export default function ControlledEnum({
       fullWidth={fullWidth}
       options={formattedOptions}
       value={multiple ? selectees : selected}
-      onChange={(_, data) =>handleChange(data as IOption<string> | IOption<string>[] | null)
+      onChange={(_, data) =>
+        handleChange(data as IOption<string> | IOption<string>[] | null)
       }
       getOptionLabel={(option) => formatLabel(option.label)}
       isOptionEqualToValue={(option, selected) =>
         option.value == selected.value
       }
+      sx={{
+        '&:hover': {
+          '& .MuiOutlinedInput-root': {
+            '& > fieldset': { borderColor: hoverColor },
+          },
+        },
+        input: { color: color },
+        '& .MuiInputLabel-root': { color: color },
+        '& .MuiOutlinedInput-root': {
+          '& > fieldset': { borderColor: borderColor },
+        },
+      }}
       renderOption={(props, option) => {
         return (
           <li {...props} key={option.value}>
