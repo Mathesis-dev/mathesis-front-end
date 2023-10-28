@@ -2,13 +2,22 @@ import { z } from 'zod';
 
 import EUserCategory from '@/shared/domain/enums/EUserCategory';
 import EUserGender from '@/shared/domain/enums/EUserGender';
+import ESubject from '@/shared/domain/enums/ESubject';
 
 import { validatePassword } from '@/shared/utils/Password';
 import { formatPhone, validatePhone } from '@/shared/utils/Phone';
 
 const schedulesSchema = z.object({
-  subject: z.string().nonempty(),
-  cost: z.number().nonnegative(),
+  subject: z.nativeEnum(ESubject, {
+    errorMap: ({ code }) => {
+      if (code === 'invalid_enum_value') return { message: 'Valor inválido!' };
+
+      return {
+        message: 'Campo obrigatório!',
+      };
+    },
+  }),
+  cost: z.string().nonempty('Campo obrigatório!'),
   onlineClass: z.boolean(),
   inPersonClass: z.boolean(),
 });
@@ -16,13 +25,13 @@ const schedulesSchema = z.object({
 const teacherSchema = z.object({
   phone: z
     .string()
-    .nonempty()
-    .transform((val) => (val ? formatPhone(val) : val))
-    .refine((val) => !val || validatePhone(val), 'Telefone inválido!'),
-  biography: z.string().nonempty(),
-  state: z.string().nonempty(),
-  city: z.string().nonempty(),
-  schedules: z.array(schedulesSchema),
+    .nonempty('Campo obrigatório')
+    .transform(formatPhone)
+    .refine(validatePhone, 'Telefone inválido!'),
+  biography: z.string().nonempty('Campo obrigatório!'),
+  state: z.string().nonempty('Campo obrigatório!'),
+  city: z.string().nonempty('Campo obrigatório!'),
+  schedules: schedulesSchema,
 });
 
 export const signUpSchema = z.object({
