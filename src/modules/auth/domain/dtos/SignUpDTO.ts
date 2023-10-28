@@ -12,11 +12,11 @@ export default interface SignUpDTO {
     phone: string;
     state: string;
     city: string;
-    schedules: Array<{
+    schedules: {
       subject: string;
       cost: number;
       onlineClass: boolean;
       inPersonClass: boolean;
-    }>;
+    };
   };
 }
