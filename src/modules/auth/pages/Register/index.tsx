@@ -3,6 +3,7 @@ import { Grid, Link, Stack, Typography } from '@mui/material';
 import { Fragment, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Link as LinkRouter, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import Page from '@/core/Layout/components/Page';
 import ControlledCheckbox from '@/shared/components/Fields/Controlled/Checkbox';
@@ -101,10 +102,7 @@ function Register() {
 
       const message = await signUp(signUpData);
 
-      setAlert({
-        type: 'success',
-        message,
-      });
+      toast.success('Conta criada com sucesso!');
 
       navigate(`/${EUnauthenticatedPath.LOGIN}`);
     } catch (error) {
@@ -318,7 +316,7 @@ function Register() {
         <Grid container width={mobile ? '70%' : '24%'}>
           <LoadingButton
             loading={loading}
-            loadingText="Acessando..."
+            loadingText="Carregando..."
             variant="contained"
             type="submit"
             size="large"
