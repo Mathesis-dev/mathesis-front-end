@@ -134,7 +134,7 @@ function Login() {
 
           <LoadingButton
             loading={loading}
-            loadingText="Acessando..."
+            loadingText="Carregando..."
             variant="contained"
             type="submit"
             size="large"
