@@ -4,7 +4,7 @@ import { isArray } from '@/shared/utils/Array';
 
 import IPaginationResponse from '@/shared/domain/interfaces/IPaginationResponse';
 import TeacherListDTO from '../domain/dtos/TeacherListDTO';
-import Teacher from '../domain/entities/Teacher';
+import Teacher from '@/shared/domain/entities/Teacher';
 
 export default class TeacherRepository extends Repository {
   constructor() {
