@@ -1,6 +1,5 @@
 import { isArray } from '@/shared/utils/Array';
 import TeachingSchedules from './TeachingSchedules';
-import User from './User';
 
 export default class Teacher {
   constructor(
@@ -33,7 +32,6 @@ export default class Teacher {
       data.biography ?? '',
 
       schedules,
-
       data.userId ?? 0,
 
       data.city ?? '',
