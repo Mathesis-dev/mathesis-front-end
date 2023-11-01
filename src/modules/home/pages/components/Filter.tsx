@@ -50,7 +50,7 @@ export default function HomeListFilter({ onFilter }: Props) {
       component="form"
       onSubmit={handleSubmit(submit)}
     >
-      <Grid item xl={2} md={4} sm={6} xs={12}>
+      <Grid item xl={6} md={6} sm={6} xs={12}>
         <ControlledDebounce
           label="Procurar"
           name="search"

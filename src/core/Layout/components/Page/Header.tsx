@@ -11,7 +11,6 @@ export default function PageHeader({ children }: Props) {
       width="100%"
       direction="row"
       alignItems="center"
-      justifyContent="space-between"
       flexWrap="wrap"
       gap={3}
     >
