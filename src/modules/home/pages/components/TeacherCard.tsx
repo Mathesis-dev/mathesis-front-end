@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
 
-import { FavoriteBorder } from '@mui/icons-material';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Favorite, FavoriteBorder } from '@mui/icons-material';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Stack,
+  Typography,
+} from '@mui/material';
 
 import Teacher from '@/shared/domain/entities/Teacher';
 
@@ -11,6 +17,16 @@ import EUserGender from '@/shared/domain/enums/EUserGender';
 import { formatCurrency } from '@/shared/utils/Currency';
 
 import Avatar from '../../components/Avatar';
+
+import FavoriteTeacherRepository from '../../repositories/FavoriteTeacherRepository';
+
+import useAuth from '@/modules/auth/hooks/useAuth';
+
+import FavoriteTeacherDTO from '../../domain/dtos/FavoriteTeacherDTO';
+
+import { toast } from 'react-toastify';
+
+import { formatErrorForNotification } from '@/shared/utils/Error';
 
 interface Props {
   teacher: Teacher;
@@ -28,7 +44,14 @@ const avatars = {
 };
 
 export default function TeacherCard({ teacher }: Props) {
+  const { user: studentUser } = useAuth();
+
+  const repository = new FavoriteTeacherRepository();
+
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
   const { user, biography, schedules, city, state } = teacher;
   const { subject, inPersonClass, onlineClass, cost } = schedules[0];
 
@@ -42,6 +65,54 @@ export default function TeacherCard({ teacher }: Props) {
     window.open(whatsAppUrl, '_blank');
   }
 
+  async function checkFavoriteStatus() {
+    setLoading(true);
+
+    try {
+      if (studentUser) {
+        const isAlreadyFavorite = await repository.isFavorite({
+          studentId: studentUser.student.id,
+          teacherId: teacher.id,
+        });
+
+        setIsFavorite(isAlreadyFavorite);
+      }
+    } catch (error) {
+      toast.error(formatErrorForNotification(error));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleFavoriteTeacher() {
+    setLoading(true);
+
+    try {
+      if (studentUser) {
+        if (isFavorite) {
+          setIsFavorite(false);
+
+          return await repository.unfavorite({
+            studentId: studentUser.student.id,
+            teacherId: teacher.id,
+          });
+        }
+
+        const body: FavoriteTeacherDTO = {
+          studentId: studentUser.student.id,
+          teacherId: teacher.id,
+        };
+
+        setIsFavorite(true);
+        await repository.favorite(body);
+      }
+    } catch (error) {
+      toast.error(formatErrorForNotification(error));
+    } finally {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
     if (user && !selectedAvatar) {
       setSelectedAvatar(
@@ -50,6 +121,8 @@ export default function TeacherCard({ teacher }: Props) {
         ]
       );
     }
+
+    checkFavoriteStatus();
   }, [user, selectedAvatar]);
 
   return (
@@ -109,9 +182,15 @@ export default function TeacherCard({ teacher }: Props) {
         <Button onClick={handleContact} variant="contained">
           Entrar em contato
         </Button>
-        {/* TODO - Trocar o icone para o preenchido quando estiver favoritado */}
-        <Button>
-          <FavoriteBorder />
+
+        <Button onClick={handleFavoriteTeacher}>
+          {loading ? (
+            <CircularProgress size={24} />
+          ) : isFavorite ? (
+            <Favorite />
+          ) : (
+            <FavoriteBorder />
+          )}
         </Button>
       </Stack>
     </Box>
