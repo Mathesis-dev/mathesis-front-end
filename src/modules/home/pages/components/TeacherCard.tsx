@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { FavoriteBorder } from '@mui/icons-material';
 import { Box, Button, Stack, Typography } from '@mui/material';
-import { Favorite, FavoriteBorder } from '@mui/icons-material';
 
 import Teacher from '@/shared/domain/entities/Teacher';
 
@@ -31,6 +31,16 @@ export default function TeacherCard({ teacher }: Props) {
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
   const { user, biography, schedules, city, state } = teacher;
   const { subject, inPersonClass, onlineClass, cost } = schedules[0];
+
+  function handleContact() {
+    const searchParams = new URLSearchParams({
+      phone: teacher.phone,
+      text: 'Olá, vi seu perfil no Mathesis e gostaria de marcar uma aula particular!',
+    }).toString();
+
+    const whatsAppUrl = `https://api.whatsapp.com/send?${searchParams}`;
+    window.open(whatsAppUrl, '_blank');
+  }
 
   useEffect(() => {
     if (user && !selectedAvatar) {
@@ -88,7 +98,9 @@ export default function TeacherCard({ teacher }: Props) {
       )}
 
       <Stack sx={{ flexDirection: 'row', gap: 2 }}>
-        <Button variant="contained">Entrar em contato</Button>
+        <Button onClick={handleContact} variant="contained">
+          Entrar em contato
+        </Button>
         {/* TODO - Trocar o icone para o preenchido quando estiver favoritado */}
         <Button>
           <FavoriteBorder />
