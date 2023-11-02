@@ -58,8 +58,12 @@ export default class FavoriteTeacherRepository extends Repository {
     throw new Error('Ops, algo inesperado aconteceu!');
   }
 
-  public async unfavorite(id: number): Promise<void> {
-    const { status } = await this.http.delete(`/${id}`);
+  public async unfavorite(body: FavoriteTeacherDTO): Promise<void> {
+    const { status } = await this.http.delete(`/`, {
+      params: {
+        ...body,
+      },
+    });
 
     if (this.isOK(status)) return;
 
