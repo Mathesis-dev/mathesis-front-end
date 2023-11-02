@@ -1,4 +1,5 @@
 import { isArray } from '@/shared/utils/Array';
+
 import TeachingSchedules from './TeachingSchedules';
 import User from './User';
 
@@ -19,7 +20,9 @@ export default class Teacher {
 
     public createdAt: string,
     public updatedAt: string,
-    public deletedAt?: string
+    public deletedAt?: string,
+
+    public user?: User
   ) {}
 
   static make(data: any): Teacher {
@@ -33,7 +36,6 @@ export default class Teacher {
       data.biography ?? '',
 
       schedules,
-
       data.userId ?? 0,
 
       data.city ?? '',
@@ -44,7 +46,9 @@ export default class Teacher {
 
       data.createdAt ?? '',
       data.updatedAt ?? '',
-      data.deletedAt
+      data.deletedAt,
+
+      data.user
     );
   }
 }

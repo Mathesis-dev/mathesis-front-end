@@ -77,7 +77,11 @@ export default function AuthenticatedSidebar() {
             padding={0}
             margin={0}
           >
-            <Logo color={theme.palette.primary.main} width="100%" />
+            <Logo
+              isSidebarOpen={isOpen}
+              color={theme.palette.primary.main}
+              width="100%"
+            />
           </Box>
         </Stack>
 
