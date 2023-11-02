@@ -146,7 +146,7 @@ export default function Favorites() {
       >
         {isLoading && <LinearProgress sx={{ width: '100%' }} />}
 
-        {!isLoading && !favoriteTeachers && (
+        {!isLoading && !favoriteTeachers?.length && (
           <Typography sx={{ textAlign: 'center', width: '100%' }}>
             Nenhum professor favoritado
           </Typography>

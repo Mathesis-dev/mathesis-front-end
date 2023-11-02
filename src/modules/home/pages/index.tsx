@@ -142,7 +142,7 @@ export default function Home() {
       >
         {isLoading && <LinearProgress sx={{ width: '100%' }} />}
 
-        {!isLoading && !teachers && (
+        {!isLoading && !teachers?.length && (
           <Typography sx={{ textAlign: 'center', width: '100%' }}>
             Nenhum professor encontrado
           </Typography>
