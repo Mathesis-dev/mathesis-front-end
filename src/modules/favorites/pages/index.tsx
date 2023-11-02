@@ -14,11 +14,11 @@ import Page from '@/core/Layout/components/Page';
 import PageCard from '@/core/Layout/components/Page/Card';
 import PageHeader from '@/core/Layout/components/Page/Header';
 import PageTitle from '@/core/Layout/components/Page/Title';
+import TeacherCard from '@/shared/components/TeacherCard';
 
-import Avatar from '../components/Avatar';
-import Pagination from '../components/Pagination';
+import Avatar from '@/shared/components/Avatar';
+import Pagination from '@/shared/components/Pagination';
 import HomeListFilter from './components/Filter';
-import TeacherCard from './components/TeacherCard';
 
 import EUserGender from '@/shared/domain/enums/EUserGender';
 

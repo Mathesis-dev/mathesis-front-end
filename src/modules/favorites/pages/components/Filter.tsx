@@ -11,15 +11,15 @@ import ControlledUF from '@/shared/components/Fields/Controlled/UF';
 
 import ESubject, { ESubjectTranslate } from '@/shared/domain/enums/ESubject';
 
-import TeacherListFilterDTO from '@/modules/home/domain/dtos/TeacherListFilterDTO';
-import ITeacherListFilter from '@/modules/home/domain/interfaces/ITeacherListFilter';
+import FavoriteTeachersListFilterDTO from '../../domain/dtos/FavoriteTeachersListFilterDTO';
+import IFavoriteTeachersListFilter from '../../domain/interfaces/ITeacherListFilter';
 
 interface Props {
-  onFilter: (filter: TeacherListFilterDTO) => void;
+  onFilter: (filter: FavoriteTeachersListFilterDTO) => void;
 }
 
 export default function HomeListFilter({ onFilter }: Props) {
-  const methods = useForm<ITeacherListFilter>({
+  const methods = useForm<IFavoriteTeachersListFilter>({
     defaultValues: { search: '' },
   });
 
@@ -30,7 +30,7 @@ export default function HomeListFilter({ onFilter }: Props) {
   const city: string | undefined = watch('city');
   const subject: ESubject | undefined = watch('subject');
 
-  function submit(data: TeacherListFilterDTO) {
+  function submit(data: FavoriteTeachersListFilterDTO) {
     onFilter(data);
   }
 

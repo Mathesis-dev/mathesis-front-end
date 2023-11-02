@@ -16,13 +16,13 @@ import EUserGender from '@/shared/domain/enums/EUserGender';
 
 import { formatCurrency } from '@/shared/utils/Currency';
 
-import Avatar from '../../components/Avatar';
+import Avatar from '@/shared/components/Avatar';
 
-import FavoriteTeacherRepository from '../../repositories/FavoriteTeacherRepository';
+import FavoriteTeacherRepository from '@/modules/favorites/repositories/FavoriteTeacherRepository';
 
 import useAuth from '@/modules/auth/hooks/useAuth';
 
-import FavoriteTeacherDTO from '../../domain/dtos/FavoriteTeacherDTO';
+import FavoriteTeacherDTO from '@/modules/favorites/domain/dtos/FavoriteTeacherDTO';
 
 import { toast } from 'react-toastify';
 
