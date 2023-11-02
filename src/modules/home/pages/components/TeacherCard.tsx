@@ -72,7 +72,15 @@ export default function TeacherCard({ teacher }: Props) {
     >
       <Avatar gender={user?.gender} selectedAvatar={selectedAvatar} />
       <Typography variant="h6">{user?.name}</Typography>
-      <Typography>{biography}</Typography>
+      <Typography
+        sx={{
+          maxHeight: '100px',
+          overflowY: 'auto',
+          padding: '8px',
+        }}
+      >
+        {biography}
+      </Typography>
       <Typography sx={{ fontWeight: 'bold' }}>
         {ESubjectTranslate[subject]}
       </Typography>
