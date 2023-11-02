@@ -14,15 +14,16 @@ import Page from '@/core/Layout/components/Page';
 import PageCard from '@/core/Layout/components/Page/Card';
 import PageHeader from '@/core/Layout/components/Page/Header';
 import PageTitle from '@/core/Layout/components/Page/Title';
-import Avatar from '@/shared/components/Avatar';
-import Pagination from '@/shared/components/Pagination';
 import TeacherCard from '@/shared/components/TeacherCard';
 
+import Avatar from '@/shared/components/Avatar';
+import Pagination from '@/shared/components/Pagination';
 import HomeListFilter from './components/Filter';
 
 import EUserGender from '@/shared/domain/enums/EUserGender';
-import TeacherListDTO from '../domain/dtos/TeacherListDTO';
-import TeacherListFilterDTO from '../domain/dtos/TeacherListFilterDTO';
+
+import FavoriteTeachersListDTO from '../domain/dtos/FavoriteTeachersListDTO';
+import FavoriteTeachersListFilterDTO from '../domain/dtos/FavoriteTeachersListFilterDTO';
 
 import useAuth from '@/modules/auth/hooks/useAuth';
 
@@ -31,7 +32,7 @@ import { capitalizeString } from '@/shared/utils/String';
 
 import IPaginationRequest from '@/shared/domain/interfaces/IPaginationRequest';
 
-import TeacherRepository from '../repositories/TeacherRepository';
+import FavoriteTeacherRepository from '../repositories/FavoriteTeacherRepository';
 
 const avatars = {
   [EUserGender.MALE]: [
@@ -44,16 +45,18 @@ const avatars = {
   ],
 };
 
-export default function Home() {
+export default function Favorites() {
   const { user } = useAuth();
   const mobile = isMobile();
 
-  const repository = new TeacherRepository();
+  const repository = new FavoriteTeacherRepository();
 
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
   const [total, setTotal] = useState<number>(1);
-  const [params, setParams] = useState<TeacherListDTO>({
-    filter: {},
+  const [params, setParams] = useState<FavoriteTeachersListDTO>({
+    filter: {
+      studentId: user?.student.id,
+    },
     pagination: {
       orderBy: 'updatedAt',
       ordering: 'desc',
@@ -62,13 +65,14 @@ export default function Home() {
     },
   });
 
-  const { data, isLoading } = useSWR(['teachers', params], ([url, value]) =>
-    repository.list(value)
+  const { data, isLoading } = useSWR(
+    ['favorite-teachers', params],
+    ([url, value]) => repository.list(value)
   );
 
-  const teachers = data?.data;
+  const favoriteTeachers = data?.data;
 
-  function handleFilter(filter: TeacherListFilterDTO) {
+  function handleFilter(filter: FavoriteTeachersListFilterDTO) {
     setParams((prev) => ({
       filter: {
         ...prev.filter,
@@ -104,10 +108,10 @@ export default function Home() {
   }, [user, selectedAvatar]);
 
   useEffect(() => {
-    if (teachers) {
-      setTotal(teachers.length);
+    if (favoriteTeachers) {
+      setTotal(favoriteTeachers.length);
     }
-  }, [teachers]);
+  }, [favoriteTeachers]);
 
   return (
     <Page>
@@ -126,7 +130,7 @@ export default function Home() {
           />
 
           <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-            Que tal buscar um professor?
+            Vamos estudar novamente?
           </Typography>
         </Stack>
 
@@ -142,9 +146,9 @@ export default function Home() {
       >
         {isLoading && <LinearProgress sx={{ width: '100%' }} />}
 
-        {!isLoading && !teachers?.length && (
+        {!isLoading && !favoriteTeachers?.length && (
           <Typography sx={{ textAlign: 'center', width: '100%' }}>
-            Nenhum professor encontrado
+            Nenhum professor favoritado
           </Typography>
         )}
 
@@ -158,8 +162,11 @@ export default function Home() {
             flexWrap: 'wrap',
           }}
         >
-          {teachers?.map((teacher) => (
-            <TeacherCard key={teacher.id} teacher={teacher} />
+          {favoriteTeachers?.map((favoriteTeacher) => (
+            <TeacherCard
+              key={favoriteTeacher.id}
+              teacher={favoriteTeacher.teacher}
+            />
           ))}
         </Box>
 

@@ -23,6 +23,7 @@ export default function Logo({ isSidebarOpen, width, height, color }: Props) {
         height: heightNotNullable,
         fontWeight: 'bold',
         textAlign: 'center',
+        fontSize: isSidebarOpen ? '1.5rem' : '1rem',
       }}
       onClick={() => navigate(`/home`)}
     >

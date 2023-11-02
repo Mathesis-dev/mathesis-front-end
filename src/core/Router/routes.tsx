@@ -1,9 +1,11 @@
-import Home from '@/modules/home/pages';
-
-import { HomeOutlined } from '@mui/icons-material';
+import { FavoriteBorder, HomeOutlined } from '@mui/icons-material';
 
 import EAuthenticatedPath from './enums/EAuthenticatedPath';
+
 import IRoute from './interfaces/IRoute';
+
+import Home from '@/modules/home/pages';
+import Favorites from '@/modules/favorites/pages';
 
 const routes: Array<IRoute> = [
   {
@@ -11,6 +13,12 @@ const routes: Array<IRoute> = [
     icon: <HomeOutlined />,
     element: <Home />,
     path: EAuthenticatedPath.HOME,
+  },
+  {
+    name: 'Favoritos',
+    icon: <FavoriteBorder />,
+    element: <Favorites />,
+    path: EAuthenticatedPath.FAVORITE,
   },
 ];
 

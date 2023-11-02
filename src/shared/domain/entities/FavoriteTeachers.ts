@@ -1,29 +1,27 @@
-import Teacher from "./Teacher";
+import Teacher from './Teacher';
 
 export default class FavoriteTeachers {
-    constructor(
-      public id: number,
-      public teacherId: number,
-      public teacher: Teacher, 
-      public createdAt: string,
-      public updatedAt: string,
-      public deletedAt?: string,
-  
-    ) {}
-  
-    static make(data: any): FavoriteTeachers {
-        const teacher = Teacher.make(data.teacher);
-  
-      return new FavoriteTeachers(
-        data.id ?? 0,
+  constructor(
+    public id: number,
+    public teacherId: number,
+    public teacher: Teacher,
+    public createdAt: string,
+    public updatedAt: string,
+    public deletedAt?: string
+  ) {}
 
-        data.teacherId ?? 0,
-        teacher,
+  static make(data: any): FavoriteTeachers {
+    const teacher = Teacher.make(data.teacher);
 
-        data.createdAt ?? '',
-        data.updatedAt ?? '',
-        data.deletedAt,
-      );
-    }
+    return new FavoriteTeachers(
+      data.id ?? 0,
+
+      data.teacherId ?? 0,
+      teacher,
+
+      data.createdAt ?? '',
+      data.updatedAt ?? '',
+      data.deletedAt
+    );
   }
-  
+}

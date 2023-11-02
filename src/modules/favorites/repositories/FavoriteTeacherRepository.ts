@@ -5,6 +5,7 @@ import { isArray } from '@/shared/utils/Array';
 import IPaginationResponse from '@/shared/domain/interfaces/IPaginationResponse';
 
 import FavoriteTeachers from '@/shared/domain/entities/FavoriteTeachers';
+
 import FavoriteTeachersListDTO from '../domain/dtos/FavoriteTeachersListDTO';
 import FavoriteTeacherDTO from '../domain/dtos/FavoriteTeacherDTO';
 
