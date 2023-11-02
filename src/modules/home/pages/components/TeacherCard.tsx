@@ -18,7 +18,7 @@ import { formatCurrency } from '@/shared/utils/Currency';
 
 import Avatar from '../../components/Avatar';
 
-import FavoriteTeacherRepository from '../../repositories/FavoriteTeacherRepository';
+import FavoriteTeacherRepository from '../../../favorites/repositories/FavoriteTeacherRepository';
 
 import useAuth from '@/modules/auth/hooks/useAuth';
 
