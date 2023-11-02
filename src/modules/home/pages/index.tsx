@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import {
   Box,
   CircularProgress,
+  Grid,
   LinearProgress,
   Stack,
   Typography,
@@ -14,9 +15,10 @@ import PageCard from '@/core/Layout/components/Page/Card';
 import PageHeader from '@/core/Layout/components/Page/Header';
 import PageTitle from '@/core/Layout/components/Page/Title';
 
+import Avatar from '../components/Avatar';
 import HomeListFilter from './components/Filter';
 import TeacherCard from './components/TeacherCard';
-import Avatar from '../components/Avatar';
+import Pagination from '../components/Pagination';
 
 import EUserGender from '@/shared/domain/enums/EUserGender';
 import TeacherListDTO from '../domain/dtos/TeacherListDTO';
@@ -26,6 +28,8 @@ import useAuth from '@/modules/auth/hooks/useAuth';
 
 import { isMobile } from '@/shared/utils/Mobile';
 import { capitalizeString } from '@/shared/utils/String';
+
+import IPaginationRequest from '@/shared/domain/interfaces/IPaginationRequest';
 
 import TeacherRepository from '../repositories/TeacherRepository';
 
@@ -47,12 +51,13 @@ export default function Home() {
   const repository = new TeacherRepository();
 
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
+  const [total, setTotal] = useState<number>(1);
   const [params, setParams] = useState<TeacherListDTO>({
     filter: {},
     pagination: {
       orderBy: 'updatedAt',
       ordering: 'desc',
-      take: 10,
+      take: 30,
       page: 1,
     },
   });
@@ -76,6 +81,18 @@ export default function Home() {
     }));
   }
 
+  function handleOnChangePagination(
+    pagination: Omit<IPaginationRequest, 'orderBy' | 'ordering'>
+  ) {
+    setParams((prev) => ({
+      ...prev,
+      pagination: {
+        ...prev.pagination,
+        ...pagination,
+      },
+    }));
+  }
+
   useEffect(() => {
     if (user && !selectedAvatar) {
       setSelectedAvatar(
@@ -85,6 +102,12 @@ export default function Home() {
       );
     }
   }, [user, selectedAvatar]);
+
+  useEffect(() => {
+    if (teachers) {
+      setTotal(teachers.length);
+    }
+  }, [teachers]);
 
   return (
     <Page>
@@ -132,12 +155,25 @@ export default function Home() {
             flexDirection: mobile ? 'column' : 'row',
             justifyContent: 'center',
             alignItems: 'center',
+            flexWrap: 'wrap',
           }}
         >
           {teachers?.map((teacher) => (
             <TeacherCard key={teacher.id} teacher={teacher} />
           ))}
         </Box>
+
+        <Grid
+          item
+          xs={12}
+          sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}
+        >
+          <Pagination
+            onChange={handleOnChangePagination}
+            total={total}
+            page={params.pagination.page}
+          />
+        </Grid>
       </PageCard>
     </Page>
   );
