@@ -9,7 +9,13 @@ interface Props {
 
 export default function MessageList({ messages, name }: Props) {
   return (
-    <Box>
+    <Box
+      sx={{
+        flexGrow: 1,
+        overflowY: 'auto',
+        padding: '0 10px',
+      }}
+    >
       {messages.map((message, i) => (
         <Message key={i} message={message} name={name} />
       ))}
