@@ -14,6 +14,8 @@ export default function MessageList({ messages, name }: Props) {
         flexGrow: 1,
         overflowY: 'auto',
         padding: '0 10px',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       {messages.map((message, i) => (

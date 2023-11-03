@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 interface Props {
   message: { user: string; text: string };
@@ -14,11 +14,35 @@ export default function Message({ message: { user, text }, name }: Props) {
   }
 
   return isSentByCurrentUser ? (
-    <Typography align="right">{text}</Typography>
+    <Box
+      sx={{
+        alignSelf: 'flex-end',
+        backgroundColor: 'primary.dark',
+        color: 'white.main',
+        borderRadius: '10px',
+        padding: '10px',
+        marginBottom: '10px',
+        maxWidth: '60%',
+      }}
+    >
+      <Typography>{text}</Typography>
+    </Box>
   ) : (
-    <Typography align="left">
-      <strong>{user}: </strong>
-      {text}
-    </Typography>
+    <Box
+      sx={{
+        alignSelf: 'flex-start',
+        backgroundColor: 'primary.main',
+        color: 'white.main',
+        borderRadius: '10px',
+        padding: '10px',
+        marginBottom: '10px',
+        maxWidth: '60%',
+      }}
+    >
+      <Typography>
+        <strong>{user}: </strong>
+        {text}
+      </Typography>
+    </Box>
   );
 }
