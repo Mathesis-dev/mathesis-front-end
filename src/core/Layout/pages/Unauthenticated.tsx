@@ -7,7 +7,7 @@ import { Stack } from '@mui/material';
 export default function Unauthenticated() {
   const { authenticated } = useAuth();
 
-  if (authenticated) return <Navigate to="/home" replace />;
+  if (authenticated) return <Navigate to="/chat" replace />;
 
   return (
     <Stack
