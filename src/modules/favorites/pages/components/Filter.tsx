@@ -41,7 +41,7 @@ export default function HomeListFilter({ onFilter }: Props) {
       city: !!city ? city : undefined,
       subject: !!subject ? subject : undefined,
     });
-  }, [search]);
+  }, [search, state, city, subject]);
 
   return (
     <Grid
