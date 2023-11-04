@@ -29,8 +29,10 @@ export default function MessageList({ messages, name }: Props) {
         onClick={() => navigate(`/${EAuthenticatedPath.HOME}`)}
       >
         Essa é uma inteligência artificial e nem sempre irá lhe responder de
-        maneira 100% correta. Caso você continue com dúvidas, experimente buscar
-        por um professor que possa lhe ofertar uma aula particular. Clique aqui!
+        maneira 100% correta. Lembre-se sempre de buscar por referências para
+        aperfeiçoar as respostas vistas aqui. Caso você continue com dúvidas,
+        experimente buscar por um professor que possa lhe ofertar uma aula
+        particular. Clique aqui!
       </Alert>
       {messages.map((message, i) => (
         <Message key={i} message={message} name={name} />
