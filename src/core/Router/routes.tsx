@@ -14,6 +14,12 @@ import Chat from '@/modules/chat/pages';
 
 const routes: Array<IRoute> = [
   {
+    name: 'Mathesis IA',
+    icon: <SmartToyOutlined />,
+    element: <Chat />,
+    path: EAuthenticatedPath.CHAT,
+  },
+  {
     name: 'Home',
     icon: <HomeOutlined />,
     element: <Home />,
@@ -24,12 +30,6 @@ const routes: Array<IRoute> = [
     icon: <FavoriteBorder />,
     element: <Favorites />,
     path: EAuthenticatedPath.FAVORITE,
-  },
-  {
-    name: 'Mathesis IA',
-    icon: <SmartToyOutlined />,
-    element: <Chat />,
-    path: EAuthenticatedPath.CHAT,
   },
 ];
 

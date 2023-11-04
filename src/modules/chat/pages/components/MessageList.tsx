@@ -1,6 +1,9 @@
-import { Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Alert, Box } from '@mui/material';
 
 import Message from './Message';
+
+import EAuthenticatedPath from '@/core/Router/enums/EAuthenticatedPath';
 
 interface Props {
   messages: Array<{ user: string; text: string }>;
@@ -8,6 +11,8 @@ interface Props {
 }
 
 export default function MessageList({ messages, name }: Props) {
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -18,6 +23,15 @@ export default function MessageList({ messages, name }: Props) {
         flexDirection: 'column',
       }}
     >
+      <Alert
+        severity="info"
+        sx={{ marginBottom: '10px', cursor: 'pointer' }}
+        onClick={() => navigate(`/${EAuthenticatedPath.HOME}`)}
+      >
+        Essa é uma inteligência artificial e nem sempre irá lhe responder de
+        maneira 100% correta. Caso você continue com dúvidas, experimente buscar
+        por um professor que possa lhe ofertar uma aula particular. Clique aqui!
+      </Alert>
       {messages.map((message, i) => (
         <Message key={i} message={message} name={name} />
       ))}
