@@ -6,33 +6,15 @@ interface Props {
 }
 
 export default function Message({ message: { user, text }, name }: Props) {
-  let isSentByCurrentUser = false;
-  const trimmedName = name.trim().toLowerCase();
+  const isSentByCurrentUser =
+    user.toLowerCase().trim() === name.toLowerCase().trim();
 
-  if (user === trimmedName) {
-    isSentByCurrentUser = true;
-  }
-
-  return isSentByCurrentUser ? (
+  return (
     <Box
       sx={{
-        alignSelf: 'flex-end',
-        backgroundColor: 'primary.dark',
         color: 'white.main',
-        borderRadius: '10px',
-        padding: '10px',
-        marginBottom: '10px',
-        maxWidth: '60%',
-      }}
-    >
-      <Typography>{text}</Typography>
-    </Box>
-  ) : (
-    <Box
-      sx={{
-        alignSelf: 'flex-start',
-        backgroundColor: 'primary.main',
-        color: 'white.main',
+        alignSelf: isSentByCurrentUser ? 'flex-end' : 'flex-start',
+        backgroundColor: isSentByCurrentUser ? 'primary.main' : 'primary.dark',
         borderRadius: '10px',
         padding: '10px',
         marginBottom: '10px',
@@ -40,7 +22,7 @@ export default function Message({ message: { user, text }, name }: Props) {
       }}
     >
       <Typography>
-        <strong>{user}: </strong>
+        {!isSentByCurrentUser && <strong>{user}: </strong>}
         {text}
       </Typography>
     </Box>

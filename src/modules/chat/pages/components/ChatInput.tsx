@@ -1,15 +1,26 @@
 import React from 'react';
 
 import SendIcon from '@mui/icons-material/Send';
-import { IconButton, InputAdornment, TextField } from '@mui/material';
+import {
+  CircularProgress,
+  IconButton,
+  InputAdornment,
+  TextField,
+} from '@mui/material';
 
 interface Props {
   message: string;
   setMessage: React.Dispatch<React.SetStateAction<string>>;
   sendMessage: (event: React.MouseEvent | React.KeyboardEvent) => void;
+  loading: boolean;
 }
 
-export default function ChatInput({ message, setMessage, sendMessage }: Props) {
+export default function ChatInput({
+  message,
+  setMessage,
+  sendMessage,
+  loading,
+}: Props) {
   return (
     <TextField
       fullWidth
@@ -20,8 +31,8 @@ export default function ChatInput({ message, setMessage, sendMessage }: Props) {
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton onClick={sendMessage}>
-              <SendIcon />
+            <IconButton onClick={sendMessage} disabled={loading}>
+              {loading ? <CircularProgress /> : <SendIcon />}
             </IconButton>
           </InputAdornment>
         ),
