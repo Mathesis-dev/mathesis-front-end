@@ -10,7 +10,7 @@ import MessageList from './components/MessageList';
 import ChatRepository from '../repositories/ChatRepository';
 
 export default function Chat() {
-  const isProduction = import.meta.env.VITE_ENVIRONMENT;
+  const enviroment = import.meta.env.VITE_ENVIRONMENT;
 
   const repository = new ChatRepository();
 
@@ -31,7 +31,7 @@ export default function Chat() {
         setMessages([...messages, { user: name, text: message }]);
         setMessage('');
 
-        if (isProduction) {
+        if (enviroment === 'production') {
           const response = await repository.sendMessage(message);
 
           const botMessage = { user: 'MathesisIA', text: response };
