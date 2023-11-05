@@ -10,6 +10,8 @@ import MessageList from './components/MessageList';
 import ChatRepository from '../repositories/ChatRepository';
 
 export default function Chat() {
+  const isProduction = import.meta.env.VITE_ENVIRONMENT;
+
   const repository = new ChatRepository();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -29,10 +31,14 @@ export default function Chat() {
         setMessages([...messages, { user: name, text: message }]);
         setMessage('');
 
-        const response = await repository.sendMessage(message);
+        if (isProduction) {
+          const response = await repository.sendMessage(message);
 
-        const botMessage = { user: 'MathesisIA', text: response };
-        setMessages((prevMessages) => [...prevMessages, botMessage]);
+          const botMessage = { user: 'MathesisIA', text: response };
+          setMessages((prevMessages) => [...prevMessages, botMessage]);
+        } else {
+          toast.warn('Chatbot indisponível no ambiente de desenvolvimento.');
+        }
       }
     } catch (error) {
       toast.error('Erro ao enviar mensagem, tente novamente mais tarde.');
