@@ -33,13 +33,10 @@ interface Props {
 }
 
 const avatars = {
-  [EUserGender.MALE]: [
-    '../../../../public/icons/male-avatar1.svg',
-    '../../../../public/icons/male-avatar2.svg',
-  ],
+  [EUserGender.MALE]: ['/icons/male-avatar1.svg', '/icons/male-avatar2.svg'],
   [EUserGender.FEMALE]: [
-    '../../../../public/icons/female-avatar1.svg',
-    '../../../../public/icons/female-avatar2.svg',
+    '/icons/female-avatar1.svg',
+    '/icons/female-avatar2.svg',
   ],
 };
 
